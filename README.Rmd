@@ -31,7 +31,20 @@ The **Merged** folder is the one which keeps participant specific merged file, a
 colnames(intervals)
 ```
 
-where `herox` stores participants alias names, `kit` is the package number, `phone` is phone id, `watch` is Apple watch id, `fitbit` is Fitbit id, `geneactiv` is GENEActiv id, `snesedoc` is SenseDoc id, `start` is start date and time (in ####-##-## ##:##:## format), `end` is end date and time (in ####-##-## ##:##:## format), `userid` is a unique id for each participant, `wrist` is 1 if Apple Watch and GENEActiv are on the same wrist, otherwise 0, `age`, `gender`, `weight` and `height` are demographic data, and `street`, `city`, `postal` are address information for each participant.
+where 
+* `herox` stores participants alias names
+* `kit` is the package number
+* `phone` is phone id
+* `watch` is Apple watch id
+* `fitbit` is Fitbit id
+* `geneactiv` is GENEActiv id
+* `snesedoc` is SenseDoc id
+* `start` is start date and time (in ####-##-## ##:##:## format)
+* `end` is end date and time (in ####-##-## ##:##:## format)
+* `userid` is a unique id for each participant
+* `wrist` is 1 if Apple Watch and GENEActiv are on the same wrist, otherwise 0
+* `age`, `gender`, `weight` and `height` are demographic data
+* `street`, `city`, `postal` are address information for each participant.
 
 **Note**: This file should be kept updated throughout the experiment.
 
