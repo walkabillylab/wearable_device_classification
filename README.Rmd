@@ -1,16 +1,7 @@
-```{r, include=FALSE}
-intervals <-
-  read.csv("intervals.csv")
-```
-
 ---
 title: "HeroX Study"
 date: '12/10/18'
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Authors
 * [Javad Rahimipour Anaraki](https://github.com/jracp)
