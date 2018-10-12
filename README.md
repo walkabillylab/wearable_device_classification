@@ -1,7 +1,3 @@
-# wearable_device_classification-
-Code for cleaning, imputation, and classification of wearable device data 
-
-
 ---
 title: "Wearable Device Classification"
 authors: "Daniel Fuller, Javad Rahimipour Anaraki, Faramarz Dorani and Henry Luan"
