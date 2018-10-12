@@ -1,3 +1,7 @@
+```{r include=FALSE}
+intervals <- read.csv("intervals.csv")
+```
+
 ## Authors
 * [Javad Rahimipour Anaraki](https://github.com/jracp)
 * [Faramarz Dorani](https://github.com/FaramarzDorani)
@@ -12,7 +16,7 @@ This document walks you through the all the required steps to extract, clean and
 
 ## Preliminaries
 
-There are six (four + two) sub-folders named as follows under a folder called **data**:
+There are six (four + one) sub-folders named as follows under a folder called **data**:
 
 * data
     + Ethica
@@ -20,7 +24,6 @@ There are six (four + two) sub-folders named as follows under a folder called **
     + HealthData (for both Apple Watch and Fitbit)
     + SenseDoc
     + Merged
-    + Results
 
 The **Merged** folder is the one which keeps participant specific merged file, a file containing all participants data with NAs, a file containing all participants data with no NAs in class labels and a file containing all participants data with no NAs at all. The **data** folder also contains a file called **intervals.csv** which stores information about each participants as follows:
 
@@ -80,7 +83,7 @@ The labels are ready and we can run the following programs after updating `timez
 * SenseDocDataPrep.R
 
 ### 3. Merging all data files
-Under **Merged** folder open **merger.R**, update `timezone` and run it to create a file called **finalData.csv** under each participant folder. The generated file contains all the processed data files for each device in second-level from `start` to `end` indicated in **intervals.csv**. Also, it creates three files under **Merged** folder, called **mergedData.csv**, **mergedDataNoNAClass.csv** and **mergedDataNoNA.csv** which contains all participants data with NAs, all participants data with no NAs in class labels and all participants data with no NAs at all, respectively.
+Under **Merged** folder open **merger.R**, update `timezone` and run it to create a file called **finalData.csv** under each participant folder. The generated file contains all the processed data files for each device in second-level from `start` to `end` indicated in **intervals.csv**. The **mergeAllMerged.R** creates three files under **Merged** folder, called **mergedData.csv**, **mergedDataNoNAClass.csv** and **mergedDataNoNA.csv** which contains all participants data with NAs, all participants data with no NAs in class labels and all participants data with no NAs at all, respectively.
 
 ### 4. Classifying the results
 [Weka](https://www.cs.waikato.ac.nz/ml/weka/) is a ready-to-use machine learning package which has been employed to apply a set of classification methods on the resulting dataset (i.e. **mergedDataNoNA.csv**). Based on the desired setup of data processing, a subset of features/attributes/columns of **mergedDataNoNA.csv** should be selected and stored in a new CSV file (eg. **subMergedDataNoNA.csv**). For this experiment, we used [Weka version 3.6.15](https://sourceforge.net/projects/weka/files/weka-3-6/3.6.15/).
