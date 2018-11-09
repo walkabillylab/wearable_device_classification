@@ -2,7 +2,7 @@
 * [Javad Rahimipour Anaraki](https://github.com/jracp)
 * [Faramarz Dorani](https://github.com/FaramarzDorani)
 * [Henry Luan](https://github.com/h3luan)
-* [Machel Rayner]()
+* Machel Rayner
 
 
 ## Introduction
