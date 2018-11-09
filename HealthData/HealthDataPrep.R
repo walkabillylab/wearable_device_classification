@@ -1,9 +1,4 @@
-# Created by Faramarz Dorani on 05/03/18
-# Department of Computer Science
-# Memorial University of Newfoundland
-# fd6713 [AT] mun [DOT] ca
-
-# Modified by Javad Rahimipour Anaraki on 05/03/18 updated 10/09/18
+# Programmed by Javad Rahimipour Anaraki on 05/03/18 updated 09/11/18
 # Ph.D. Candidate
 # Department of Computer Science
 # Memorial University of Newfoundland
@@ -30,76 +25,53 @@ library(imputeTS)
 detect_nas <- function(data,
                        column = "heart",
                        interval = 10.0) {
-  # A function to detect zeroes and NAs in the dataset for a column
-  first <- NaN
-  last <- NaN
-  user <-  data[1, "user_name"]
-  for (i in 1:nrow(data)) {
-    row <- data[i,]
-    if (row[column][[1]] == 0 && is.nan(first)) {
-      first <- row$date_time
-      user <- row$user_name
-    }
+  start = 1
+  end = 1
+  
+  for (j in 1:nrow(data)) {
+    row <- data[j,]
     
-    if (!is.nan(first) &&
-        row$date_time > first && row[column][[1]] == 0) {
-      last <- row$date_time
-    }
-    
-    # User is changed but still there are zero
-    if (row[column][[1]] == 0 &&
-        !is.nan(first) && !is.nan(last) && user != row$user_name) {
-      first_t <- as.POSIXct(first, format = "%Y-%m-%d %H:%M:%S")
-      last_t <- as.POSIXct(last, format = "%Y-%m-%d %H:%M:%S")
-      lap <- difftime(last_t, first_t, units = "min")
-      if (lap >= interval) {
-        data[which(
-          data$user_name == user &
-            data[, column] == 0 &
-            data$date_time >= first &
-            data$date_time <= last
-        ), column] <- NaN
+    if (row[column][[1]] == 0) {
+      end <- j
+      
+      if ((end - start >= interval &&
+           sum(data[start:end, column]) == 0) |
+          (end == nrow(data)) && sum(data[start:end, column]) == 0) {
+        data[start:end, column] <- NaN
+        start = end + 1
       }
-      first <- NaN
-      last <- NaN
-    }
-    
-    # Streak of zeroes ends
-    if (row[column][[1]] != 0 &&
-        !is.nan(first) && !is.nan(last) && user == row$user_name) {
-      first_t <- as.POSIXct(first, format = "%Y-%m-%d %H:%M:%S")
-      last_t <- as.POSIXct(last, format = "%Y-%m-%d %H:%M:%S")
-      lap <- difftime(last_t, first_t, units = "min")
-      if (lap >= interval) {
-        data[which(data$user_name == user &
-                     data[, column] == 0 &
-                     data$DateTime >= first &
-                     data$DateTime <= last), column] <- NaN
+      
+    } else {
+      
+      end <- j - 1
+      
+      if ((end - start >= interval &&
+           sum(data[start:end, column]) == 0) |
+          (end == nrow(data)) && sum(data[start:end, column]) == 0) {
+        data[start:end, column] <- NaN
       }
+      
+      start = end + 2
     }
     
-    # Reinitialize the variables
-    if (row[column][[1]] != 0) {
-      first <- NaN
-      last <- NaN
-    }
   }
   return(data)
 }
+
 
 
 #=========================Variables========================
 OS <- Sys.info()
 if (OS["sysname"] == "Windows") {
   path <-
-    "Z:/HeroX/data/HealthData/"
+    "Z:/Research/dfuller/Walkabilly/studies/HeroX/data/HealthData/"
   intrPath <-
-    "Z:/HeroX/data/"
+    "Z:/Research/dfuller/Walkabilly/studies/HeroX/data/"
 } else {
   path <-
-    "/HeroX/data/HealthData/"
+    "/Volumes/hkr-storage/Research/dfuller/Walkabilly/studies/HeroX/data/HealthData/"
   intrPath <-
-    "/HeroX/data/"
+    "/Volumes/hkr-storage/Research/dfuller/Walkabilly/studies/HeroX/data/"
 }
 setwd(path)
 
