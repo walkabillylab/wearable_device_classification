@@ -127,6 +127,7 @@ for (i in 1:length(participants)) {
                      interval = 10)
         
         #============Remove NAs (interval of 10 min)============
+        apple_process$interpolated <- NA
         apple_cleaned <- na.omit(apple_process)
         
         #==================Interpolate data=====================
@@ -139,7 +140,7 @@ for (i in 1:length(participants)) {
           try(apple_cleaned$heart <-
                 na.interpolation(apple_cleaned$heart, option = "linear"))
         }
-        
+      
         write.csv(
           apple_cleaned,
           paste0(path, uid, "/applewatch_data.csv"),
@@ -148,7 +149,14 @@ for (i in 1:length(participants)) {
         )
         
       } else {
-        write.csv(
+        
+        if (!any(str_detect(colnames(data_subset_apple), "interpolated"))) {
+          data_subset_apple[1, ] <- NA
+          data_subset_apple$interpolated <- NA
+          data_subset_apple <- na.omit(data_subset_apple)
+        }
+        
+          write.csv(
           data_subset_apple,
           paste0(path, uid, "/applewatch_data.csv"),
           row.names = F,
@@ -183,6 +191,7 @@ for (i in 1:length(participants)) {
                      interval = 10)
         
         #============Remove NAs (interval of 10 min)============
+        fitbit_process$interpolated <- NA
         fitbit_cleaned <- na.omit(fitbit_process)
         
         #==================Interpolate data=====================
@@ -203,6 +212,13 @@ for (i in 1:length(participants)) {
           quote = F
         )
       } else {
+        
+        if (!any(str_detect(colnames(data_subset_fitbit), "interpolated"))) {
+          data_subset_fitbit[1, ] <- NA
+          data_subset_fitbit$interpolated <- NA
+          data_subset_fitbit <- na.omit(data_subset_fitbit)
+        }
+        
         write.csv(
           data_subset_fitbit,
           paste(path, uid, "/fitbit_data.csv", sep = ""),
