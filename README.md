@@ -1,5 +1,5 @@
 ## Authors
-* [Javad Rahimipour Anaraki](https://github.com/jracp)
+* [Javad Rahimipour Anaraki](https://github.com/jranaraki)
 * [Faramarz Dorani](https://github.com/FaramarzDorani)
 * [Henry Luan](https://github.com/h3luan)
 * Machel Rayner
